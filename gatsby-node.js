@@ -1,7 +1,7 @@
 const path = require('path');
 
-exports.createPages = ({ actions, graphql }) => {
-  const { createPage } = actions;
+exports.createPages = ({ boundActionCreators, graphql }) => {
+  const { createPage } = boundActionCreators;
 
   const blogPostTemplate = path.resolve(`src/templates/blogTemplate.js`);
 
@@ -13,8 +13,13 @@ exports.createPages = ({ actions, graphql }) => {
       ) {
         edges {
           node {
+            excerpt(pruneLength: 250)
+            html
+            id
             frontmatter {
+              date
               path
+              title
             }
           }
         }
